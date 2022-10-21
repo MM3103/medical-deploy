@@ -8,7 +8,7 @@ function build_basic_images() {
     --build-arg JAR_FILE=${JAR_FILE} \
     -t ${APP_NAME}:latest \
     -t ${APP_NAME}:simple .
-}
+}ws
 
 function build_jar() {
   # Get count of args
@@ -42,11 +42,11 @@ function pull_or_clone_proj() {
  if cd ${SERVICE_NAME}
   then
  #  git branch -f master origin/master
-   git checkout master
+   git checkout dev
    git pull
    cd ..
   else
-    git clone --branch master ${SERVICE_URL} ${SERVICE_NAME}
+    git clone --branch dev ${SERVICE_URL} ${SERVICE_NAME}
  fi
 }
 
@@ -54,10 +54,10 @@ function pull_or_clone_proj() {
 cd ..
 
 # Clone or update projects
-pull_or_clone_proj common-module https://github.com/stazhirovka2022/common-module.git
-pull_or_clone_proj medical-monitoring https://github.com/stazhirovka2022/medical-monitoring.git
-pull_or_clone_proj message-analyzer https://github.com/stazhirovka2022/message-analyzer.git
-pull_or_clone_proj person-service https://github.com/stazhirovka2022/person-service.git
+pull_or_clone_proj common-module https://github.com/MM3103/common-module.git
+pull_or_clone_proj medical-monitoring https://github.com/MM3103/medical-monitoring.git
+pull_or_clone_proj message-analyzer https://github.com/MM3103/message-analyzer.git
+pull_or_clone_proj person-service https://github.com/MM3103/person-service.git
 
 build_lib common-module
 build_jar medical-monitoring message-analyzer person-service
