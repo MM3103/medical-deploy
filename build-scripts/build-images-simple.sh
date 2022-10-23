@@ -8,7 +8,7 @@ function build_basic_images() {
     --build-arg JAR_FILE=${JAR_FILE} \
     -t ${APP_NAME}:latest \
     -t ${APP_NAME}:simple .
-}ws
+}
 
 function build_jar() {
   # Get count of args
@@ -58,9 +58,10 @@ pull_or_clone_proj common-module https://github.com/MM3103/common-module.git
 pull_or_clone_proj medical-monitoring https://github.com/MM3103/medical-monitoring.git
 pull_or_clone_proj message-analyzer https://github.com/MM3103/message-analyzer.git
 pull_or_clone_proj person-service https://github.com/MM3103/person-service.git
+pull_or_clone_proj queue_consumer https://github.com/MM3103/queue_consumer.git
 
 build_lib common-module
-build_jar medical-monitoring message-analyzer person-service
+build_jar medical-monitoring message-analyzer person-service queue_consumer
 
 
 APP_VERSION=0.0.1-SNAPSHOT
@@ -69,3 +70,4 @@ echo "Building Docker images"
 build_basic_images ./medical-monitoring/core/target/medical-monitoring-${APP_VERSION}.jar application/medical-monitoring
 build_basic_images ./message-analyzer/core/target/message-analyzer-${APP_VERSION}.jar application/message-analyzer
 build_basic_images ./person-service/core/target/person-service-${APP_VERSION}.jar application/person-service
+build_basic_images ./queue_consumer/target/queue_consumer-${APP_VERSION}.jar application/queue_consumer
